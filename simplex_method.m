@@ -14,10 +14,10 @@ function [istatus,X,eta,iB,iN,xB] = simplex_method(A,b,c,irule)
         fprintf('\nProblem is infeasible \n');
         return;
     end
+    
     istatus_2 = istatus;
     iN_2 = iN;
     iN = iN(iN < size(A,2)+1);
-    %A = [A, eye(size(b,1),size(b,1))];
     if (b >= 0)
         fprintf('\nb is Positive\n')
     else
@@ -32,6 +32,8 @@ function [istatus,X,eta,iB,iN,xB] = simplex_method(A,b,c,irule)
     c = [c, zeros(1,size(b,1))];
     X = zeros(1,size(iB,2)+size(iN,2));
     istatus = 0;
+    
+    %   Iterate the simplex steps until termination
     while (istatus == 0)
         [istatus,iB,iN,xB,Binv] = simplex_step(A,b,c,iB,iN,xB,Binv,irule);
         X = zeros(1,size(iB,2)+size(iN,2));
