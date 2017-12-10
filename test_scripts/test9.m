@@ -31,7 +31,7 @@ if (istatus~=0)
    fprintf('istatus is wrong\n');
 end
 
-[X,eta,isfeasible,isoptimal,zN]=simplex_test(A,b,c,iB,xB)
+[X,eta,isfeasible,isoptimal,zN]=simplex_test(A,b,c,iB,xB);
 
 if (isfeasible ~= 1)
    fprintf('your solution is not feasible!!!\n');
