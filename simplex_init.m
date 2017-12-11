@@ -1,6 +1,6 @@
 function [istatus,iB,iN,xB] = simplex_init(A,b,c)
     
-    eps = 10^-5;
+    eps = 10^-10;
 
     % Initialize iN, iB, and a list of Artificial variables
     iN = zeros(1,size(A,2));
@@ -44,14 +44,15 @@ function [istatus,iB,iN,xB] = simplex_init(A,b,c)
         if(c_aux(iN)-(c_aux(iB)*Binv)*A_aux(:,iN) >=0)
             
             istatus = 0;
-            
+
+                       
             % Check that any artificial variables remaining in basis have
             % value of zero.
             
             for (chk = 1:size(iB,2))
                 for chkl = 1:size(Artificial_Variables,2)
                     if (iB(chk) == Artificial_Variables(chkl) )
-                        if (xB(chk) >= 0)
+                        if (xB(chk) > eps)
                             istatus = 16;
                             return;
                         end
